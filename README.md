@@ -1,6 +1,8 @@
 
 # Setup Docker Laravel 10 com PHP 8.1
 
+Curso de laravel 10 com DTO, Service Layers, Repository, Patterns
+
 ### Passo a passo
 
 ```sh
