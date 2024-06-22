@@ -1,11 +1,10 @@
-version: "3.7"
-
 services:
     # image project
     app:
         build:
             context: .
             dockerfile: Dockerfile
+        container_name: app
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
@@ -20,6 +19,7 @@ services:
     # nginx
     nginx:
         image: nginx:alpine
+        container_name: nginx
         restart: unless-stopped
         ports:
             - "8989:80"
@@ -32,6 +32,7 @@ services:
     # db mysql
     db:
         image: mysql:5.7.22
+        container_name: db
         restart: unless-stopped
         environment:
             MYSQL_DATABASE: ${DB_DATABASE:-laravel}
@@ -48,13 +49,17 @@ services:
     # redis
     redis:
         image: redis:latest
+        container_name: redis
         restart: unless-stopped
+        ports:
+            - "6379:6379"
         networks:
             - laravel
 
     # mailpit
     mailpit:
         image: axllent/mailpit:latest
+        container_name: mailpit
         restart: unless-stopped
         ports:
             - "1025:1025" # Porta SMTP
